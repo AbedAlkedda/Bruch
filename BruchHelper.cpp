@@ -17,7 +17,6 @@ void showError(){
 }
 
 void add_Fractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator){
-
   long int lhs_zaehler = args["lhs_zaehler"],
            rhs_zaehler = args["rhs_zaehler"],
            rhs_nenner  = args["rhs_nenner"];
