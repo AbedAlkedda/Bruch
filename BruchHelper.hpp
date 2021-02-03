@@ -1,4 +1,3 @@
-#include <vector>
 #include <iostream>
 
 bool hasSameDenominator(const long int &lhs_denominator, const long int &rhs_denominator);

@@ -18,17 +18,17 @@ class Bruch {
 		void setBruch(long int n, long int z);
 
 		// Operatoren zwischen zwei Objekten vom Typ Bruch
-		friend Bruch operator+ (const Bruch& lhs, const Bruch& rhs);
-		friend Bruch operator* (const Bruch& lhs, const Bruch& rhs);
-		friend Bruch operator- (const Bruch& lhs, const Bruch& rhs);
-		friend Bruch operator/ (const Bruch& lhs, const Bruch& rhs);
+		friend Bruch operator+ (const Bruch &lhs, const Bruch &rhs);
+		friend Bruch operator* (const Bruch &lhs, const Bruch &rhs);
+		friend Bruch operator- (const Bruch &lhs, const Bruch &rhs);
+		friend Bruch operator/ (const Bruch &lhs, const Bruch &rhs);
 		friend std::ostream& operator<< (std::ostream& output, const Bruch& bruch);
 
 		// Operatoren zwischen Objekten vom Typ Bruch und dem Datentyp long int
-		friend Bruch operator+ (const Bruch& lhs, const std::array<long int, 2>& rhs);
-		friend Bruch operator* (const Bruch& lhs, const std::array<long int, 2>& rhs);
-		friend Bruch operator- (const Bruch& lhs, const std::array<long int, 2>& rhs);
-		friend Bruch operator/ (const Bruch& lhs, const std::array<long int, 2>& rhs);
+		friend Bruch operator+ (const Bruch &lhs, const std::array<long int, 2> &rhs);
+		friend Bruch operator* (const Bruch &lhs, const std::array<long int, 2> &rhs);
+		friend Bruch operator- (const Bruch &lhs, const std::array<long int, 2> &rhs);
+		friend Bruch operator/ (const Bruch &lhs, const std::array<long int, 2> &rhs);
 
 	private:
 
