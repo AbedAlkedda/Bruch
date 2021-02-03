@@ -62,9 +62,9 @@ std::unordered_map<std::string, long int> BruchArgs(const Bruch &lhs, const Bruc
 
 	std::unordered_map<std::string, long int> args;
 	args["lhs_zaehler"] = lhs_zaehler;
-	args["lhs_nenner"]	= lhs_nenner;
-	args["rhs_zaehler"]	= rhs_zaehler;
-	args["rhs_nenner"]	= rhs_nenner;
+	args["lhs_nenner"]  = lhs_nenner;
+	args["rhs_zaehler"] = rhs_zaehler;
+	args["rhs_nenner"]  = rhs_nenner;
 
   return args;
 }
@@ -73,13 +73,13 @@ std::unordered_map<std::string, long int> BruchArgs(const Bruch &lhs, const std:
   long int lhs_zaehler = lhs.getZaehler(),
            lhs_nenner  = lhs.getNenner(),
            rhs_nenner  = rhs[0],
-					 rhs_zaehler = rhs[1];
+           rhs_zaehler = rhs[1];
 
 	std::unordered_map<std::string, long int> args;
 	args["lhs_zaehler"] = lhs_zaehler;
-	args["lhs_nenner"]	= lhs_nenner;
-  args["rhs_zaehler"]	= rhs_zaehler;
-	args["rhs_nenner"]	= rhs_nenner;
+	args["lhs_nenner"]  = lhs_nenner;
+  args["rhs_zaehler"] = rhs_zaehler;
+	args["rhs_nenner"]  = rhs_nenner;
 
   return args;
 }
