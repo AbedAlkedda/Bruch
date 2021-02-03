@@ -7,13 +7,12 @@ using std::cin;
 using std::endl;
 
 int main() {
-	Bruch b(1, 2); // 2/1
-	Bruch c(1, 2); // 2/1	
-	cout << b << endl;
 
-	Bruch test;
-	test = b + c; // 4/2
+	Bruch b(2, 1); // 2/1
+	Bruch c(4, 2); // 4/2
+
+	Bruch test = b + c;
+
 	cout << test << endl;
-
 	return 0;
 }

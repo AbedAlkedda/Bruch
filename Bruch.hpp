@@ -1,4 +1,5 @@
 #include <array>
+#include <unordered_map>
 #include <iostream>
 
 #ifndef BRUCH_H
@@ -32,6 +33,7 @@ class Bruch {
 
 	private:
 
+		// Attribute
 		long int _nenner;
 		long int _zaehler;
 };
