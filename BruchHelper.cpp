@@ -59,11 +59,11 @@ std::unordered_map<std::string, long int> BruchArgs(const Bruch &lhs, const Bruc
            rhs_zaehler = rhs.getZaehler(),
            rhs_nenner  = rhs.getNenner();
 
-	std::unordered_map<std::string, long int> args;
-	args["lhs_zaehler"] = lhs_zaehler;
-	args["lhs_nenner"]  = lhs_nenner;
-	args["rhs_zaehler"] = rhs_zaehler;
-	args["rhs_nenner"]  = rhs_nenner;
+  std::unordered_map<std::string, long int> args;
+  args["lhs_zaehler"] = lhs_zaehler;
+  args["lhs_nenner"]  = lhs_nenner;
+  args["rhs_zaehler"] = rhs_zaehler;
+  args["rhs_nenner"]  = rhs_nenner;
 
   return args;
 }
@@ -74,19 +74,19 @@ std::unordered_map<std::string, long int> BruchArgs(const Bruch &lhs, const std:
            rhs_nenner  = rhs[0],
            rhs_zaehler = rhs[1];
 
-	std::unordered_map<std::string, long int> args;
-	args["lhs_zaehler"] = lhs_zaehler;
-	args["lhs_nenner"]  = lhs_nenner;
+  std::unordered_map<std::string, long int> args;
+  args["lhs_zaehler"] = lhs_zaehler;
+  args["lhs_nenner"]  = lhs_nenner;
   args["rhs_zaehler"] = rhs_zaehler;
-	args["rhs_nenner"]  = rhs_nenner;
+  args["rhs_nenner"]  = rhs_nenner;
 
   return args;
 }
 
 std::unordered_map<std::string, bool> getBruchValidation(const long int &lhs_nenner, const long int &rhs_nenner){
   std::unordered_map<std::string, bool> args;
-	args["has_same_denominator"] = hasSameDenominator(lhs_nenner, rhs_nenner);
-	args["is_denominators_zero"] = isDenominatorsZero(lhs_nenner, rhs_nenner);
+  args["has_same_denominator"] = hasSameDenominator(lhs_nenner, rhs_nenner);
+  args["is_denominators_zero"] = isDenominatorsZero(lhs_nenner, rhs_nenner);
 
   return args;
 }
