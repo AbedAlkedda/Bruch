@@ -10,8 +10,8 @@ int main() {
 
 	Bruch b(2, 1); // 2/1
 	Bruch c(4, 2); // 4/2
-
-	Bruch test = b + c;
+	std::array <long int, 2> a = {2, 2};
+	Bruch test = b - a;
 
 	cout << test << endl;
 	return 0;
