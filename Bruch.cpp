@@ -14,16 +14,16 @@ Bruch::Bruch(long int z){
  }
 
 Bruch::Bruch(){
- _nenner  = 1;
- _zaehler = 1;
+  _nenner  = 1;
+  _zaehler = 1;
  }
 
 // Getter und Setter
-long int Bruch::getZaehler() const {
+long int Bruch::getNumerator() const {
   return _zaehler;
 }
 
-long int Bruch::getNenner() const {
+long int Bruch::getDenominator() const {
   return _nenner;
 }
 
@@ -39,7 +39,7 @@ Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
            rhs_zaehler,
            rhs_nenner;
 
-  std::unordered_map<std::string, long int> args = BruchArgs(lhs, rhs);
+  std::unordered_map<std::string, long int> args = fractionsArgs(lhs, rhs);
 
   std::unordered_map<std::string, bool> bruch_validation = getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
 
@@ -49,13 +49,13 @@ Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
 
     result.setBruch(0, 0);
   } else if (bruch_validation["has_same_denominator"]){
-    add_Fractions(args, bruch_validation["has_same_denominator"]);
+    addFractions(args, bruch_validation["has_same_denominator"]);
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
     result.setBruch(rhs_zaehler, rhs_nenner);
   } else {
-    add_Fractions(args, bruch_validation["has_same_denominator"]);
+    addFractions(args, bruch_validation["has_same_denominator"]);
     lhs_zaehler = args["lhs_zaehler"];
     lhs_nenner  = args["lhs_nenner"];
     rhs_zaehler = args["rhs_zaehler"];
@@ -72,7 +72,7 @@ Bruch operator- (const Bruch &lhs, const Bruch &rhs){
            rhs_zaehler,
            rhs_nenner;
 
-  std::unordered_map<std::string, long int> args = BruchArgs(lhs, rhs);
+  std::unordered_map<std::string, long int> args = fractionsArgs(lhs, rhs);
 
   std::unordered_map<std::string, bool> bruch_validation = getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
 	
@@ -82,13 +82,13 @@ Bruch operator- (const Bruch &lhs, const Bruch &rhs){
 
     result.setBruch(0, 0);
   } else if (bruch_validation["has_same_denominator"]){
-    divide_Fractions(args, bruch_validation["has_same_denominator"]);
+    divideFractions(args, bruch_validation["has_same_denominator"]);
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
     result.setBruch(rhs_zaehler, rhs_nenner);
   } else {
-    divide_Fractions(args, bruch_validation["has_same_denominator"]);
+    divideFractions(args, bruch_validation["has_same_denominator"]);
     lhs_zaehler = args["lhs_zaehler"];
     lhs_nenner  = args["lhs_nenner"];
     rhs_zaehler = args["rhs_zaehler"];
@@ -101,20 +101,20 @@ Bruch operator- (const Bruch &lhs, const Bruch &rhs){
 
 Bruch operator* (const Bruch &lhs, const Bruch &rhs){
   Bruch result;
-  result.setBruch(lhs.getNenner()  * rhs.getNenner(),
-                  lhs.getZaehler() * rhs.getZaehler());
+  result.setBruch(lhs.getDenominator()  * rhs.getDenominator(),
+                  lhs.getNumerator() * rhs.getNumerator());
   return result;
 }
 
 Bruch operator/ (const Bruch &lhs, const Bruch &rhs){
   Bruch result;
-  result.setBruch(lhs.getZaehler() * rhs.getNenner(),
-	                lhs.getNenner()  * rhs.getZaehler());
+  result.setBruch(lhs.getNumerator() * rhs.getDenominator(),
+	                lhs.getDenominator()  * rhs.getNumerator());
   return result;
 }
 
 std::ostream& operator<< (std::ostream &output, const Bruch &bruch){
-  output << bruch.getZaehler() << '/' << bruch.getNenner();
+  output << bruch.getNumerator() << '/' << bruch.getDenominator();
   return output;
 }
 
@@ -125,7 +125,7 @@ Bruch operator+ (const Bruch &lhs, const std::array<long int, 2> &rhs){
            rhs_zaehler,
            rhs_nenner;
 
-  std::unordered_map<std::string, long int> args = BruchArgs(lhs, rhs);
+  std::unordered_map<std::string, long int> args = fractionsArgs(lhs, rhs);
 
   std::unordered_map<std::string, bool> bruch_validation = getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
 	
@@ -135,13 +135,13 @@ Bruch operator+ (const Bruch &lhs, const std::array<long int, 2> &rhs){
 
     result.setBruch(0, 0);
   } else if (bruch_validation["has_same_denominator"]){
-    add_Fractions(args, bruch_validation["has_same_denominator"]);
+    addFractions(args, bruch_validation["has_same_denominator"]);
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
     result.setBruch(rhs_zaehler, rhs_nenner);
   } else {
-    add_Fractions(args, bruch_validation["has_same_denominator"]);
+    addFractions(args, bruch_validation["has_same_denominator"]);
     lhs_zaehler = args["lhs_zaehler"];
     lhs_nenner  = args["lhs_nenner"];
     rhs_zaehler = args["rhs_zaehler"];
@@ -158,7 +158,7 @@ Bruch operator- (const Bruch &lhs, const std::array<long int, 2> &rhs){
            rhs_zaehler,
            rhs_nenner;
 
-  std::unordered_map<std::string, long int> args = BruchArgs(lhs, rhs);
+  std::unordered_map<std::string, long int> args = fractionsArgs(lhs, rhs);
 
   std::unordered_map<std::string, bool> bruch_validation = getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
 	
@@ -168,13 +168,13 @@ Bruch operator- (const Bruch &lhs, const std::array<long int, 2> &rhs){
 
     result.setBruch(0, 0);
   } else if (bruch_validation["has_same_denominator"]){
-  	divide_Fractions(args, bruch_validation["has_same_denominator"]);
+  	divideFractions(args, bruch_validation["has_same_denominator"]);
   	rhs_zaehler = args["rhs_zaehler"];
   	rhs_nenner  = args["rhs_nenner"];
 
   	result.setBruch(rhs_zaehler, rhs_nenner);
   } else {
-  	divide_Fractions(args, bruch_validation["has_same_denominator"]);
+  	divideFractions(args, bruch_validation["has_same_denominator"]);
   	lhs_zaehler = args["lhs_zaehler"];
   	lhs_nenner  = args["lhs_nenner"];
   	rhs_zaehler = args["rhs_zaehler"];
@@ -186,8 +186,8 @@ Bruch operator- (const Bruch &lhs, const std::array<long int, 2> &rhs){
 }
 
 Bruch operator* (const Bruch &lhs_bruch, const std::array<long int, 2> &rhs_bruch){
-  long int lhs_nenner_bruch  = lhs_bruch.getNenner(),
-           lhs_zaehler_bruch = lhs_bruch.getZaehler(),
+  long int lhs_nenner_bruch  = lhs_bruch.getDenominator(),
+           lhs_zaehler_bruch = lhs_bruch.getNumerator(),
            rhs_nenner_bruch  = rhs_bruch[0],
            rhs_zaehler_bruch = rhs_bruch[1];
 
@@ -198,8 +198,8 @@ Bruch operator* (const Bruch &lhs_bruch, const std::array<long int, 2> &rhs_bruc
 }
 
 Bruch operator/ (const Bruch &lhs_bruch, const std::array<long int, 2> &rhs_bruch){
-  long int lhs_nenner_bruch  = lhs_bruch.getNenner(),
-           lhs_zaehler_bruch = lhs_bruch.getZaehler(),
+  long int lhs_nenner_bruch  = lhs_bruch.getDenominator(),
+           lhs_zaehler_bruch = lhs_bruch.getNumerator(),
            rhs_nenner_bruch  = rhs_bruch[0],
            rhs_zaehler_bruch = rhs_bruch[1];
 

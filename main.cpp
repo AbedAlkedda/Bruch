@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Bruch.hpp"
 
-// specifying what we ONLY need from namespace std
 using std::cout;
 using std::cin;
 using std::endl;

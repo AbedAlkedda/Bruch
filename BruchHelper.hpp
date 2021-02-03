@@ -4,11 +4,11 @@
 #include "Bruch.hpp"
 
 void showError();
-void multiply_Fractions(std::unordered_map<std::string, long int> &args);
+void multiplyFractions(std::unordered_map<std::string, long int> &args);
 bool hasSameDenominator(const long int &lhs_nenner, const long int &rhs_nenner);
 bool isDenominatorsZero(const long int &lhs_nenner, const long int &rhs_nenner);
-std::unordered_map<std::string, long int> BruchArgs(const Bruch &lhs, const Bruch &rhs);
-void add_Fractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
-void divide_Fractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
-std::unordered_map<std::string, long int> BruchArgs(const Bruch &lhs, const std::array<long int, 2> &rhs);
+std::unordered_map<std::string, long int> fractionsArgs(const Bruch &lhs, const Bruch &rhs);
+void addFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
+void divideFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
+std::unordered_map<std::string, long int> fractionsArgs(const Bruch &lhs, const std::array<long int, 2> &rhs);
 std::unordered_map<std::string, bool> getBruchValidation(const long int &lhs_nenner, const long int &rhs_nenner);

@@ -14,8 +14,8 @@ class Bruch {
     Bruch();
 
     // Getter und Setter
-    long int getNenner() const;
-    long int getZaehler() const;
+    long int getDenominator() const;
+    long int getNumerator() const;
     void setBruch(long int n, long int z);
 
     // Operatoren zwischen zwei Objekten vom Typ Bruch

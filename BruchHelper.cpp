@@ -1,7 +1,7 @@
 #include <iostream>
 #include "BruchHelper.hpp"
 #include "Bruch.hpp"
-
+namespace 
 bool hasSameDenominator(const long int &lhs_nenner, const long int &rhs_nenner){
   return (lhs_nenner == rhs_nenner ? true : false);
 }
@@ -16,7 +16,7 @@ void showError(){
   std::cout << "Dividieren durch 0 ist nicht erlaubt!" << std::endl;
 }
 
-void add_Fractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator){
+void addFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator){
   long int lhs_zaehler = args["lhs_zaehler"],
            rhs_zaehler = args["rhs_zaehler"],
            rhs_nenner  = args["rhs_nenner"];
@@ -24,12 +24,12 @@ void add_Fractions(std::unordered_map<std::string, long int> &args, bool has_sam
     args["rhs_zaehler"] = lhs_zaehler + rhs_zaehler;
     args["rhs_nenner"]  = rhs_nenner;
   } else {
-    multiply_Fractions(args);
+    multiplyFractions(args);
   }
 
 }
 
-void divide_Fractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator){
+void divideFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator){
   long int lhs_zaehler = args["lhs_zaehler"],
            rhs_zaehler = args["rhs_zaehler"],
            rhs_nenner  = args["rhs_nenner"];
@@ -37,11 +37,11 @@ void divide_Fractions(std::unordered_map<std::string, long int> &args, bool has_
     args["rhs_zaehler"] = lhs_zaehler - rhs_zaehler;
     args["rhs_nenner"]  = rhs_nenner;
   } else {
-    multiply_Fractions(args);
+    multiplyFractions(args);
   }
 }
 
-void multiply_Fractions(std::unordered_map<std::string, long int> &args){
+void multiplyFractions(std::unordered_map<std::string, long int> &args){
   long int lhs_zaehler = args["lhs_zaehler"],
            lhs_nenner  = args["lhs_nenner"],
            rhs_zaehler = args["rhs_zaehler"],
@@ -53,11 +53,11 @@ void multiply_Fractions(std::unordered_map<std::string, long int> &args){
   args["rhs_nenner"]  = rhs_nenner  * lhs_nenner;
 }
 
-std::unordered_map<std::string, long int> BruchArgs(const Bruch &lhs, const Bruch &rhs){
-  long int lhs_zaehler = lhs.getZaehler(),
-           lhs_nenner  = lhs.getNenner(),
-           rhs_zaehler = rhs.getZaehler(),
-           rhs_nenner  = rhs.getNenner();
+std::unordered_map<std::string, long int> fractionsArgs(const Bruch &lhs, const Bruch &rhs){
+  long int lhs_zaehler = lhs.getNumerator(),
+           lhs_nenner  = lhs.getDenominator(),
+           rhs_zaehler = rhs.getNumerator(),
+           rhs_nenner  = rhs.getDenominator();
 
   std::unordered_map<std::string, long int> args;
   args["lhs_zaehler"] = lhs_zaehler;
@@ -68,9 +68,9 @@ std::unordered_map<std::string, long int> BruchArgs(const Bruch &lhs, const Bruc
   return args;
 }
 
-std::unordered_map<std::string, long int> BruchArgs(const Bruch &lhs, const std::array<long int, 2> &rhs){
-  long int lhs_zaehler = lhs.getZaehler(),
-           lhs_nenner  = lhs.getNenner(),
+std::unordered_map<std::string, long int> fractionsArgs(const Bruch &lhs, const std::array<long int, 2> &rhs){
+  long int lhs_zaehler = lhs.getNumerator(),
+           lhs_nenner  = lhs.getDenominator(),
            rhs_nenner  = rhs[0],
            rhs_zaehler = rhs[1];
 
