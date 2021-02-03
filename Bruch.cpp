@@ -75,9 +75,9 @@ Bruch operator* (const Bruch &lhs, const Bruch &rhs){
 
 Bruch operator- (const Bruch &lhs, const Bruch &rhs){
 	long int lhs_zaehler,
-	 				 lhs_nenner,
-					 rhs_zaehler,
-					 rhs_nenner;
+           lhs_nenner,
+           rhs_zaehler,
+           rhs_nenner;
 
 	std::unordered_map<std::string, long int> args = BruchArgs(lhs, rhs);
 
@@ -121,9 +121,9 @@ std::ostream& operator<< (std::ostream &output, const Bruch &bruch){
 // Operatoren zwischen Objekten vom Typ Bruch und dem Datentyp long int
 Bruch operator+ (const Bruch &lhs_bruch, const std::array<long int, 2> &rhs_bruch){
 	long int lhs_nenner_bruch  = lhs_bruch.getNenner(),
-			 		 lhs_zaehler_bruch = lhs_bruch.getZaehler(),
-			 		 rhs_nenner_bruch  = rhs_bruch[0],
-					 rhs_zaehler_bruch = rhs_bruch[1];
+           lhs_zaehler_bruch = lhs_bruch.getZaehler(),
+           rhs_nenner_bruch  = rhs_bruch[0],
+           rhs_zaehler_bruch = rhs_bruch[1];
 
 	Bruch result;
 	result.setBruch(lhs_zaehler_bruch + rhs_zaehler_bruch,
@@ -133,9 +133,9 @@ Bruch operator+ (const Bruch &lhs_bruch, const std::array<long int, 2> &rhs_bruc
 
 Bruch operator* (const Bruch &lhs_bruch, const std::array<long int, 2> &rhs_bruch){
 	long int lhs_nenner_bruch  = lhs_bruch.getNenner(),
-			 		 lhs_zaehler_bruch = lhs_bruch.getZaehler(),
-			 		 rhs_nenner_bruch  = rhs_bruch[0],
-					 rhs_zaehler_bruch = rhs_bruch[1];
+           lhs_zaehler_bruch = lhs_bruch.getZaehler(),
+           rhs_nenner_bruch  = rhs_bruch[0],
+           rhs_zaehler_bruch = rhs_bruch[1];
 
 	Bruch result;
 	result.setBruch(lhs_zaehler_bruch * rhs_zaehler_bruch,
