@@ -1,7 +1,7 @@
 #include <iostream>
 #include "BruchHelper.hpp"
 #include "Bruch.hpp"
-namespace 
+// namespace 
 bool hasSameDenominator(const long int &lhs_nenner, const long int &rhs_nenner){
   return (lhs_nenner == rhs_nenner ? true : false);
 }
