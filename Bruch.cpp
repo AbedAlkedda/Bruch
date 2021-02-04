@@ -34,84 +34,122 @@ void Bruch::setBruch(long int nenner, long int zaehler){
   _zaehler = zaehler;
 }
 
-// Operatoren zwischen zwei Objekten vom Typ Bruch
+// Operatoren
+// ToDo: fix * and /
 Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
-	long int lhs_zaehler,
-           lhs_nenner,
-           rhs_zaehler,
-           rhs_nenner;
-
-  std::unordered_map<std::string, long int> args = FractionMethods::fractionsArgs(lhs, rhs);
-
+  std::unordered_map<std::string, long int> args         = FractionMethods::fractionsArgs(lhs, rhs);
   std::unordered_map<std::string, bool> bruch_validation = FractionMethods::getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
 
+  long int rhs_zaehler,
+           rhs_nenner;
+
+  bool is_denominators_zero = bruch_validation["is_denominators_zero"],
+       has_same_denominator = bruch_validation["has_same_denominator"];
+
   Bruch result;
-  if (bruch_validation["is_denominators_zero"]){
+  if (is_denominators_zero){
     FractionMethods::showError();
 
     result.setBruch(0, 0);
-  } else if (bruch_validation["has_same_denominator"]){
-    FractionMethods::addFractions(args, bruch_validation["has_same_denominator"]);
+  } else if (has_same_denominator){
+    FractionMethods::addFractions(args, has_same_denominator);
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
     result.setBruch(rhs_zaehler, rhs_nenner);
   } else {
     FractionMethods::addFractions(args, bruch_validation["has_same_denominator"]);
-    lhs_zaehler = args["lhs_zaehler"];
-    lhs_nenner  = args["lhs_nenner"];
-    rhs_zaehler = args["rhs_zaehler"];
+    long int lhs_zaehler = args["lhs_zaehler"],
+             lhs_nenner  = args["lhs_nenner"];
 
-    result.setBruch(lhs_nenner, lhs_zaehler + rhs_zaehler);
+    rhs_zaehler  = args["rhs_zaehler"];
+    lhs_zaehler += rhs_zaehler;
+
+    result.setBruch(lhs_nenner, lhs_zaehler);
 	}
 
   return result;
 }
 
 Bruch operator- (const Bruch &lhs, const Bruch &rhs){
-  long int lhs_zaehler,
-           lhs_nenner,
-           rhs_zaehler,
+  std::unordered_map<std::string, long int> args         = FractionMethods::fractionsArgs(lhs, rhs);
+  std::unordered_map<std::string, bool> bruch_validation = FractionMethods::getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
+
+  long int rhs_zaehler,
            rhs_nenner;
 
-  std::unordered_map<std::string, long int> args = FractionMethods::fractionsArgs(lhs, rhs);
+  bool is_denominators_zero = bruch_validation["is_denominators_zero"],
+       has_same_denominator = bruch_validation["has_same_denominator"];
 
-  std::unordered_map<std::string, bool> bruch_validation = FractionMethods::getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
-	
   Bruch result;
-  if (bruch_validation["is_denominators_zero"]){
+
+  if (is_denominators_zero){
     FractionMethods::showError();
 
     result.setBruch(0, 0);
-  } else if (bruch_validation["has_same_denominator"]){
-    FractionMethods::divideFractions(args, bruch_validation["has_same_denominator"]);
+  } else if (has_same_denominator){
+    FractionMethods::divideFractions(args, has_same_denominator);
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
     result.setBruch(rhs_zaehler, rhs_nenner);
   } else {
-    FractionMethods::divideFractions(args, bruch_validation["has_same_denominator"]);
-    lhs_zaehler = args["lhs_zaehler"];
-    lhs_nenner  = args["lhs_nenner"];
-    rhs_zaehler = args["rhs_zaehler"];
+    FractionMethods::divideFractions(args, has_same_denominator);
+    long int lhs_zaehler = args["lhs_zaehler"],
+             lhs_nenner  = args["lhs_nenner"];
 
-    result.setBruch(lhs_nenner, lhs_zaehler - rhs_zaehler);
+    rhs_zaehler  = args["rhs_zaehler"];
+    lhs_zaehler -= rhs_zaehler;
+
+    result.setBruch(lhs_nenner, lhs_zaehler);
   }
 
   return result;
 }
 
 Bruch operator* (const Bruch &lhs, const Bruch &rhs){
+  std::unordered_map<std::string, long int> args = FractionMethods::fractionsArgs(lhs, rhs);
+
+  long int lhs_nenner = args["lhs_nenner"],
+           rhs_nenner = args["rhs_nenner"];
+
   Bruch result;
-  result.setBruch(lhs.getDenominator()  * rhs.getDenominator(),
-                  lhs.getNumerator() * rhs.getNumerator());
+
+  if(lhs_nenner == 0 || rhs_nenner == 0){
+    showError();
+    result.setBruch(0, 0);
+  } else {
+    long int lhs_zaehler = args["lhs_zaehler"],
+             rhs_zaehler = args["rhs_zaehler"];
+    
+    lhs_nenner  *= rhs_nenner;
+    lhs_zaehler *= rhs_zaehler;
+    
+    result.setBruch(lhs_nenner, lhs_zaehler);
+  }
   return result;
 }
 
 Bruch operator/ (const Bruch &lhs, const Bruch &rhs){
+  std::unordered_map<std::string, long int> args = FractionMethods::fractionsArgs(lhs, rhs);
+
+  long int lhs_nenner = args["lhs_nenner"],
+           rhs_nenner = args["rhs_nenner"];
+
   Bruch result;
-  result.setBruch(lhs.getNumerator() * rhs.getDenominator(),
-	                lhs.getDenominator()  * rhs.getNumerator());
+
+  if(lhs_nenner == 0 || rhs_nenner == 0){
+    showError();
+    result.setBruch(0, 0);
+  } else {
+    long int lhs_zaehler = args["lhs_zaehler"],
+             rhs_zaehler = args["rhs_zaehler"];
+    
+    lhs_nenner  *= rhs_zaehler;
+    lhs_zaehler *= rhs_nenner;
+    
+    result.setBruch(lhs_nenner, lhs_zaehler);
+  }
   return result;
 }
 
