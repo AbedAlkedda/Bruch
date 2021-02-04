@@ -35,7 +35,6 @@ void Bruch::setBruch(long int nenner, long int zaehler){
 }
 
 // Operatoren
-// ToDo: fix * and /
 Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
   std::unordered_map<std::string, long int> args         = FractionMethods::fractionsArgs(lhs, rhs);
   std::unordered_map<std::string, bool> bruch_validation = FractionMethods::getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
@@ -57,6 +56,7 @@ Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
     rhs_nenner  = args["rhs_nenner"];
 
     result.setBruch(rhs_zaehler, rhs_nenner);
+    result.kuerzeBruch(result);
   } else {
     FractionMethods::addFractions(args, bruch_validation["has_same_denominator"]);
     long int lhs_zaehler = args["lhs_zaehler"],
@@ -66,6 +66,7 @@ Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
     lhs_zaehler += rhs_zaehler;
 
     result.setBruch(lhs_nenner, lhs_zaehler);
+    result.kuerzeBruch(result);
 	}
 
   return result;
@@ -93,6 +94,7 @@ Bruch operator- (const Bruch &lhs, const Bruch &rhs){
     rhs_nenner  = args["rhs_nenner"];
 
     result.setBruch(rhs_zaehler, rhs_nenner);
+    result.kuerzeBruch(result);
   } else {
     FractionMethods::divideFractions(args, has_same_denominator);
     long int lhs_zaehler = args["lhs_zaehler"],
@@ -102,6 +104,7 @@ Bruch operator- (const Bruch &lhs, const Bruch &rhs){
     lhs_zaehler -= rhs_zaehler;
 
     result.setBruch(lhs_nenner, lhs_zaehler);
+    result.kuerzeBruch(result);
   }
 
   return result;
@@ -126,6 +129,7 @@ Bruch operator* (const Bruch &lhs, const Bruch &rhs){
     lhs_zaehler *= rhs_zaehler;
     
     result.setBruch(lhs_nenner, lhs_zaehler);
+    result.kuerzeBruch(result);
   }
   return result;
 }
@@ -147,7 +151,8 @@ Bruch operator/ (const Bruch &lhs, const Bruch &rhs){
     
     lhs_nenner  *= rhs_zaehler;
     lhs_zaehler *= rhs_nenner;
-    
+
+    result.kuerzeBruch(result);
     result.setBruch(lhs_nenner, lhs_zaehler);
   }
   return result;
@@ -156,4 +161,29 @@ Bruch operator/ (const Bruch &lhs, const Bruch &rhs){
 std::ostream& operator<< (std::ostream &output, const Bruch &bruch){
   output << bruch.getNumerator() << '/' << bruch.getDenominator();
   return output;
+}
+
+Bruch Bruch::kuerzeBruch(Bruch &bruch){
+  long int nenner  = bruch.getDenominator(),
+           zaehler = bruch.getNumerator();
+
+  long int ggt = _ggT(nenner, zaehler);
+
+  nenner  /= ggt;
+  zaehler /= ggt;
+
+  bruch.setBruch(nenner, zaehler);
+  return bruch;
+}
+
+long int Bruch::_ggT(long int nenner, long int zaehler) {
+  if (nenner == 0 || zaehler == 0){
+    return 0;
+  } else if (nenner == zaehler){
+    return nenner;
+  } else if (nenner > zaehler){
+    return _ggT(nenner - zaehler, zaehler);
+  } else {
+    return _ggT(nenner, zaehler - nenner);
+  }
 }
