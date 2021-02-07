@@ -16,7 +16,6 @@ class Bruch {
     // Getter und Setter
     long int getDenominator() const;
     long int getNumerator() const;
-    void setBruch(long int n, long int z);
 
     // Bruch keurzer
     Bruch kuerzeBruch(Bruch &bruch);
@@ -27,13 +26,18 @@ class Bruch {
     friend Bruch operator- (const Bruch &lhs, const Bruch &rhs);
     friend Bruch operator/ (const Bruch &lhs, const Bruch &rhs);
     friend std::ostream& operator<< (std::ostream& output, const Bruch& bruch);
+    friend std::istream& operator>> (std::istream& input, Bruch& bruch);
+
 
   private:
 
   // Attribute
   long int _nenner;
   long int _zaehler;
+
+  // private Methoden
   long int _ggT(long int nenner, long int zaehler);
+  void _setBruch(long int n, long int z);
 };
 
 #endif

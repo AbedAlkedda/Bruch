@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Bruch.hpp"
 #include "BruchHelper.hpp"
+#include <typeinfo>
+#include <istream>
 
 using namespace FractionMethods;
 
@@ -29,7 +31,7 @@ long int Bruch::getDenominator() const {
   return _nenner;
 }
 
-void Bruch::setBruch(long int nenner, long int zaehler){
+void Bruch::_setBruch(long int nenner, long int zaehler){
   _nenner = nenner;
   _zaehler = zaehler;
 }
@@ -49,14 +51,13 @@ Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
   if (is_denominators_zero){
     FractionMethods::showError();
 
-    result.setBruch(0, 0);
+    result._setBruch(0, 0);
   } else if (has_same_denominator){
     FractionMethods::addFractions(args, has_same_denominator);
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
-    result.setBruch(rhs_zaehler, rhs_nenner);
-    result.kuerzeBruch(result);
+    result._setBruch(rhs_zaehler, rhs_nenner);
   } else {
     FractionMethods::addFractions(args, bruch_validation["has_same_denominator"]);
     long int lhs_zaehler = args["lhs_zaehler"],
@@ -65,8 +66,7 @@ Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
     rhs_zaehler  = args["rhs_zaehler"];
     lhs_zaehler += rhs_zaehler;
 
-    result.setBruch(lhs_nenner, lhs_zaehler);
-    result.kuerzeBruch(result);
+    result._setBruch(lhs_nenner, lhs_zaehler);
 	}
 
   return result;
@@ -87,14 +87,13 @@ Bruch operator- (const Bruch &lhs, const Bruch &rhs){
   if (is_denominators_zero){
     FractionMethods::showError();
 
-    result.setBruch(0, 0);
+    result._setBruch(0, 0);
   } else if (has_same_denominator){
     FractionMethods::divideFractions(args, has_same_denominator);
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
-    result.setBruch(rhs_zaehler, rhs_nenner);
-    result.kuerzeBruch(result);
+    result._setBruch(rhs_zaehler, rhs_nenner);
   } else {
     FractionMethods::divideFractions(args, has_same_denominator);
     long int lhs_zaehler = args["lhs_zaehler"],
@@ -103,8 +102,7 @@ Bruch operator- (const Bruch &lhs, const Bruch &rhs){
     rhs_zaehler  = args["rhs_zaehler"];
     lhs_zaehler -= rhs_zaehler;
 
-    result.setBruch(lhs_nenner, lhs_zaehler);
-    result.kuerzeBruch(result);
+    result._setBruch(lhs_nenner, lhs_zaehler);
   }
 
   return result;
@@ -120,7 +118,7 @@ Bruch operator* (const Bruch &lhs, const Bruch &rhs){
 
   if(lhs_nenner == 0 || rhs_nenner == 0){
     showError();
-    result.setBruch(0, 0);
+    result._setBruch(0, 0);
   } else {
     long int lhs_zaehler = args["lhs_zaehler"],
              rhs_zaehler = args["rhs_zaehler"];
@@ -128,8 +126,7 @@ Bruch operator* (const Bruch &lhs, const Bruch &rhs){
     lhs_nenner  *= rhs_nenner;
     lhs_zaehler *= rhs_zaehler;
     
-    result.setBruch(lhs_nenner, lhs_zaehler);
-    result.kuerzeBruch(result);
+    result._setBruch(lhs_nenner, lhs_zaehler);
   }
   return result;
 }
@@ -144,7 +141,7 @@ Bruch operator/ (const Bruch &lhs, const Bruch &rhs){
 
   if(lhs_nenner == 0 || rhs_nenner == 0){
     showError();
-    result.setBruch(0, 0);
+    result._setBruch(0, 0);
   } else {
     long int lhs_zaehler = args["lhs_zaehler"],
              rhs_zaehler = args["rhs_zaehler"];
@@ -152,15 +149,19 @@ Bruch operator/ (const Bruch &lhs, const Bruch &rhs){
     lhs_nenner  *= rhs_zaehler;
     lhs_zaehler *= rhs_nenner;
 
-    result.kuerzeBruch(result);
-    result.setBruch(lhs_nenner, lhs_zaehler);
+    result._setBruch(lhs_nenner, lhs_zaehler);
   }
   return result;
 }
 
 std::ostream& operator<< (std::ostream &output, const Bruch &bruch){
-  output << bruch.getNumerator() << '/' << bruch.getDenominator();
+  output << bruch.getNumerator() << '/' << bruch.getDenominator() << std::endl;
   return output;
+}
+
+std::istream& operator>> (std::istream &input, Bruch &bruch){
+  input >> bruch._zaehler;
+  return input;
 }
 
 Bruch Bruch::kuerzeBruch(Bruch &bruch){
@@ -172,7 +173,7 @@ Bruch Bruch::kuerzeBruch(Bruch &bruch){
   nenner  /= ggt;
   zaehler /= ggt;
 
-  bruch.setBruch(nenner, zaehler);
+  bruch._setBruch(nenner, zaehler);
   return bruch;
 }
 
