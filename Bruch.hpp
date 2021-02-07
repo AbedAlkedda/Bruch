@@ -18,7 +18,7 @@ class Bruch {
     long int getNumerator() const;
 
     // Bruch keurzer
-    Bruch kuerzeBruch(Bruch &bruch);
+    void kuerzeBruch(Bruch &bruch);
 
     // Operatoren zwischen zwei Objekten vom Typ Bruch
     friend Bruch operator+ (const Bruch &lhs, const Bruch &rhs);

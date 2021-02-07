@@ -1,8 +1,6 @@
 #include <iostream>
 #include "Bruch.hpp"
 #include "BruchHelper.hpp"
-#include <typeinfo>
-#include <istream>
 
 using namespace FractionMethods;
 
@@ -57,7 +55,7 @@ Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
-    result._setBruch(rhs_zaehler, rhs_nenner);
+    result._setBruch(rhs_nenner, rhs_zaehler);
   } else {
     FractionMethods::addFractions(args, bruch_validation["has_same_denominator"]);
     long int lhs_zaehler = args["lhs_zaehler"],
@@ -93,7 +91,7 @@ Bruch operator- (const Bruch &lhs, const Bruch &rhs){
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
-    result._setBruch(rhs_zaehler, rhs_nenner);
+    result._setBruch(rhs_nenner, rhs_zaehler);
   } else {
     FractionMethods::divideFractions(args, has_same_denominator);
     long int lhs_zaehler = args["lhs_zaehler"],
@@ -164,7 +162,7 @@ std::istream& operator>> (std::istream &input, Bruch &bruch){
   return input;
 }
 
-Bruch Bruch::kuerzeBruch(Bruch &bruch){
+void Bruch::kuerzeBruch(Bruch &bruch){
   long int nenner  = bruch.getDenominator(),
            zaehler = bruch.getNumerator();
 
@@ -174,7 +172,6 @@ Bruch Bruch::kuerzeBruch(Bruch &bruch){
   zaehler /= ggt;
 
   bruch._setBruch(nenner, zaehler);
-  return bruch;
 }
 
 long int Bruch::_ggT(long int nenner, long int zaehler) {

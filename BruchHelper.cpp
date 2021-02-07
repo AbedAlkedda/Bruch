@@ -75,3 +75,10 @@ std::unordered_map<std::string, bool> FractionMethods::getBruchValidation(const 
 
   return args;
 }
+
+void FractionOperator::fractionsCollectorRebuild(std::vector<Bruch> &brueche, const Bruch &bruch){
+  for (int i = 0; i < 2; i++){
+    brueche.pop_back();
+  }
+  brueche.push_back(bruch);
+}

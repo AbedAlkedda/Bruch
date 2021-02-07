@@ -2,6 +2,8 @@
 #include <unordered_map>
 #include <array>
 #include "Bruch.hpp"
+#include <vector>
+
 namespace FractionMethods {
   void showError();
   void multiplyFractions(std::unordered_map<std::string, long int> &args);
@@ -11,4 +13,8 @@ namespace FractionMethods {
   void addFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
   void divideFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
   std::unordered_map<std::string, bool> getBruchValidation(const long int &lhs_nenner, const long int &rhs_nenner);
+}
+
+namespace FractionOperator {
+  void fractionsCollectorRebuild(std::vector<Bruch> &brueche, const Bruch &bruch);
 }
