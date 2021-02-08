@@ -10,12 +10,31 @@ using std::endl;
 using namespace FractionOperator;
 
 int main() {
-  std::vector <Bruch>    brueche;
+  cout << "\U00002663\U00002663\tBruch\t\U00002663\U00002663\n";
+  // char user_input;
+  // cout << "1. Operator zwischen Brüche\n"
+  //      << "2. Operatir zwischen Bruch und long int" << endl;
+  // cin >> user_input;
+  // switch (user_input)
+  // {
+  // case '1':
+  //   /* code */
+  //   break;
+  // case '2':
+  //   /* code */
+  //   break;
+  
+  // default:
+  //   cout << "Eingabe ist Falsch" << endl;
+  //   break;
+  // }
+ 
+  std::vector <Bruch> brueche;
   std::vector <long int> bruch_builder;
 
   Bruch bruch;
   char c;
-  bool is_fraction_part;
+  bool is_fraction_part = true;
   cout << " Eingabe: ";
   while (std::cin){
     c = static_cast<char>(cin.get());
@@ -54,8 +73,9 @@ int main() {
           rhs_bruch = brueche[brueche_count - 1];
           bruch     = lhs_bruch + rhs_bruch;
 
+          cout << lhs_bruch << " + " << rhs_bruch << " = " << bruch << endl;
+
           fractionsCollectorRebuild(brueche, bruch);
-          cout << "bruch: " << bruch;
           break;
 
         case '-':
@@ -64,7 +84,8 @@ int main() {
           bruch     = lhs_bruch - rhs_bruch;
 
           fractionsCollectorRebuild(brueche, bruch);
-          cout << "bruch: " << bruch;
+
+          cout << lhs_bruch << " - " << rhs_bruch << " = " << bruch << endl;
           break;
 
         case '*':
@@ -72,8 +93,9 @@ int main() {
           rhs_bruch = brueche[brueche_count - 1];
           bruch     = lhs_bruch * rhs_bruch;
 
+          cout << lhs_bruch << " * " << rhs_bruch << " = " << bruch << endl;
+
           fractionsCollectorRebuild(brueche, bruch);
-          cout << "bruch: " << bruch;
           break;
 
         case '/':
@@ -81,21 +103,20 @@ int main() {
             lhs_bruch = brueche[brueche_count - 2];
             rhs_bruch = brueche[brueche_count - 1];
             bruch     = lhs_bruch / rhs_bruch;
-            is_fraction_part = false;
-            fractionsCollectorRebuild(brueche, bruch);
-            cout << "bruch: " << bruch;
-          }
-          break;
 
-        default:
-          cout << "Invaild Input!" << bruch;
+            is_fraction_part = false;
+
+            cout << lhs_bruch << " / " << rhs_bruch << " = " << bruch << endl;
+
+            fractionsCollectorRebuild(brueche, bruch);
+          }
           break;
       }
     }
 
     if(c == 'k'){
       bruch.kuerzeBruch(bruch);
-      cout << bruch;
+      cout << "gekürtzt: " << bruch << endl;
     }
 
     // Das nächste Zeichen ist Enter-Taste

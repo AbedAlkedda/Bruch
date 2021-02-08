@@ -37,7 +37,7 @@ void Bruch::_setBruch(long int nenner, long int zaehler){
 // Operatoren
 Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
   std::unordered_map<std::string, long int> args         = FractionMethods::fractionsArgs(lhs, rhs);
-  std::unordered_map<std::string, bool> bruch_validation = FractionMethods::getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
+  std::unordered_map<std::string, bool> bruch_validation = FractionMethods::getFractionValidation(args["lhs_nenner"], args["rhs_nenner"]);
 
   long int rhs_zaehler,
            rhs_nenner;
@@ -72,7 +72,7 @@ Bruch operator+ (const Bruch &lhs, const Bruch &rhs){
 
 Bruch operator- (const Bruch &lhs, const Bruch &rhs){
   std::unordered_map<std::string, long int> args         = FractionMethods::fractionsArgs(lhs, rhs);
-  std::unordered_map<std::string, bool> bruch_validation = FractionMethods::getBruchValidation(args["lhs_nenner"], args["rhs_nenner"]);
+  std::unordered_map<std::string, bool> bruch_validation = FractionMethods::getFractionValidation(args["lhs_nenner"], args["rhs_nenner"]);
 
   long int rhs_zaehler,
            rhs_nenner;
@@ -153,7 +153,7 @@ Bruch operator/ (const Bruch &lhs, const Bruch &rhs){
 }
 
 std::ostream& operator<< (std::ostream &output, const Bruch &bruch){
-  output << bruch.getNumerator() << '/' << bruch.getDenominator() << std::endl;
+  output << bruch.getNumerator() << '/' << bruch.getDenominator();
   return output;
 }
 
@@ -174,7 +174,7 @@ void Bruch::kuerzeBruch(Bruch &bruch){
   bruch._setBruch(nenner, zaehler);
 }
 
-long int Bruch::_ggT(long int nenner, long int zaehler) {
+long int FractionMethods::_ggT(long int nenner, long int zaehler){
   if (nenner == 0 || zaehler == 0){
     return 0;
   } else if (nenner == zaehler){
@@ -184,4 +184,8 @@ long int Bruch::_ggT(long int nenner, long int zaehler) {
   } else {
     return _ggT(nenner, zaehler - nenner);
   }
+}
+
+long int FractionMethods::_kgV(long int nenner, long int zaehler){
+  return (nenner * zaehler) / FractionMethods::_ggT(nenner, zaehler);
 }

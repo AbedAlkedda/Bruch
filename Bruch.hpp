@@ -36,7 +36,6 @@ class Bruch {
   long int _zaehler;
 
   // private Methoden
-  long int _ggT(long int nenner, long int zaehler);
   void _setBruch(long int n, long int z);
 };
 

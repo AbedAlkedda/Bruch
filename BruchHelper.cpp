@@ -24,7 +24,7 @@ void FractionMethods::addFractions(std::unordered_map<std::string, long int> &ar
     args["rhs_zaehler"] = lhs_zaehler + rhs_zaehler;
     args["rhs_nenner"]  = rhs_nenner;
   } else {
-    multiplyFractions(args);
+    unionFractions(args);
   }
 
 }
@@ -37,20 +37,33 @@ void FractionMethods::divideFractions(std::unordered_map<std::string, long int> 
     args["rhs_zaehler"] = lhs_zaehler - rhs_zaehler;
     args["rhs_nenner"]  = rhs_nenner;
   } else {
-    multiplyFractions(args);
+    unionFractions(args);
   }
 }
 
-void FractionMethods::multiplyFractions(std::unordered_map<std::string, long int> &args){
+void FractionMethods::unionFractions(std::unordered_map<std::string, long int> &args){
   long int lhs_zaehler = args["lhs_zaehler"],
            lhs_nenner  = args["lhs_nenner"],
            rhs_zaehler = args["rhs_zaehler"],
            rhs_nenner  = args["rhs_nenner"];
 
-  args["lhs_zaehler"] = lhs_zaehler * rhs_nenner;
-  args["lhs_nenner"]  = lhs_nenner  * rhs_nenner;
-  args["rhs_zaehler"] = rhs_zaehler * lhs_nenner;
-  args["rhs_nenner"]  = rhs_nenner  * lhs_nenner;
+  long int kgv = _kgV(lhs_nenner, rhs_nenner);
+  if (kgv == lhs_nenner){
+    long int multi = kgv / rhs_nenner;
+    args["rhs_zaehler"] = multi * rhs_zaehler;
+    args["rhs_nenner"]  = kgv;
+
+  } else if (kgv == rhs_nenner){
+    long int multi = kgv / lhs_nenner;
+    args["lhs_zaehler"] = multi * lhs_zaehler;
+    args["lhs_nenner"]  = kgv;
+
+  } else {
+    args["lhs_zaehler"] = lhs_zaehler * rhs_nenner;
+    args["lhs_nenner"]  = lhs_nenner  * rhs_nenner;
+    args["rhs_zaehler"] = rhs_zaehler * lhs_nenner;
+    args["rhs_nenner"]  = rhs_nenner  * lhs_nenner;
+  }
 }
 
 std::unordered_map<std::string, long int> FractionMethods::fractionsArgs(const Bruch &lhs, const Bruch &rhs){
@@ -68,7 +81,7 @@ std::unordered_map<std::string, long int> FractionMethods::fractionsArgs(const B
   return args;
 }
 
-std::unordered_map<std::string, bool> FractionMethods::getBruchValidation(const long int &lhs_nenner, const long int &rhs_nenner){
+std::unordered_map<std::string, bool> FractionMethods::getFractionValidation(const long int &lhs_nenner, const long int &rhs_nenner){
   std::unordered_map<std::string, bool> args;
   args["has_same_denominator"] = hasSameDenominator(lhs_nenner, rhs_nenner);
   args["is_denominators_zero"] = isDenominatorsZero(lhs_nenner, rhs_nenner);
