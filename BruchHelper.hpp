@@ -19,4 +19,7 @@ namespace FractionMethods {
 
 namespace FractionOperator {
   void fractionsCollectorRebuild(std::vector<Bruch> &brueche, const Bruch &bruch);
+  void callOperatorFractions();
+  void callOperatorFractionLongInt();
+  void showUsageExample();
 }

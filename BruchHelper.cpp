@@ -2,6 +2,10 @@
 #include "BruchHelper.hpp"
 #include "Bruch.hpp"
 
+using std::cout;
+using std::cin;
+using std::endl;
+
 bool FractionMethods::hasSameDenominator(const long int &lhs_nenner, const long int &rhs_nenner){
   return (lhs_nenner == rhs_nenner ? true : false);
 }
@@ -94,4 +98,175 @@ void FractionOperator::fractionsCollectorRebuild(std::vector<Bruch> &brueche, co
     brueche.pop_back();
   }
   brueche.push_back(bruch);
+}
+
+void FractionOperator::callOperatorFractions(){
+  std::vector <Bruch> brueche;
+  std::vector <long int> bruch_builder;
+
+  Bruch bruch;
+  char c;
+  bool is_fraction_part = true;
+  cout << " Eingabe: ";
+  while (cin){
+    c = static_cast<char>(cin.get());
+
+    // Das nächste Zeichen im Eingabearray ist eine Nummer
+    if ((c >= '0') && (c <= '9')) {
+      long int char_value_as_nummeric = c - '0';
+      is_fraction_part = true;
+      cin.putback(c);
+      cin >> bruch;
+      bruch_builder.push_back(char_value_as_nummeric);
+
+      if(bruch_builder.size() >= 2){
+        Bruch zaehler = bruch_builder[0],
+              nenner  = bruch_builder[1];
+        bruch = zaehler / nenner;
+        brueche.push_back(bruch);
+        bruch_builder.clear();
+        is_fraction_part = false;
+      }
+    }
+
+    /*
+      Das nächste Zeichen im Eingabearray ist ein Operator und der Switch
+      ist nur für den Operator zwischen zwei Objekten der Klasse Bruch
+    */
+    else
+    {
+      unsigned long brueche_count = brueche.size();
+      Bruch lhs_bruch,
+            rhs_bruch;
+
+      switch (c){
+        case '+':
+          lhs_bruch = brueche[brueche_count - 2];
+          rhs_bruch = brueche[brueche_count - 1];
+          bruch     = lhs_bruch + rhs_bruch;
+
+          cout << lhs_bruch << " + " << rhs_bruch << " = " << bruch << endl;
+
+          fractionsCollectorRebuild(brueche, bruch);
+          break;
+
+        case '-':
+          lhs_bruch = brueche[brueche_count - 2];
+          rhs_bruch = brueche[brueche_count - 1];
+          bruch     = lhs_bruch - rhs_bruch;
+
+          fractionsCollectorRebuild(brueche, bruch);
+
+          cout << lhs_bruch << " - " << rhs_bruch << " = " << bruch << endl;
+          break;
+
+        case '*':
+          lhs_bruch = brueche[brueche_count - 2];
+          rhs_bruch = brueche[brueche_count - 1];
+          bruch     = lhs_bruch * rhs_bruch;
+
+          cout << lhs_bruch << " * " << rhs_bruch << " = " << bruch << endl;
+
+          fractionsCollectorRebuild(brueche, bruch);
+          break;
+
+        case '/':
+          if(brueche_count >= 2 && !is_fraction_part){
+            lhs_bruch = brueche[brueche_count - 2];
+            rhs_bruch = brueche[brueche_count - 1];
+            bruch     = lhs_bruch / rhs_bruch;
+
+            is_fraction_part = false;
+
+            cout << lhs_bruch << " / " << rhs_bruch << " = " << bruch << endl;
+
+            fractionsCollectorRebuild(brueche, bruch);
+          }
+          break;
+      }
+    }
+
+    if(c == 'k'){
+      bruch.kuerzeBruch(bruch);
+      cout << "gekürtzt: " << bruch << endl;
+    }
+
+    // Das nächste Zeichen ist Enter-Taste
+    if(c == '\r' || c == '\n'){ break; }
+  }
+}
+
+void FractionOperator::callOperatorFractionLongInt(){
+  std::vector <long int> bruch_builder;
+  std::vector <Bruch> bruch_holder;
+  Bruch bruch;
+  long int lhs_input = 0;
+  char c;
+  bool is_fraction_part = true;
+  std::cout << "Eingabe: ";
+  while (cin){
+    c = static_cast<char>(cin.get());
+
+    if ((c >= '0') && (c <= '9')) {
+      long int char_value_as_nummeric = c - '0';
+      if(bruch_holder.size() == 1){
+        cin.putback(c);
+        cin >> lhs_input;
+      } else {
+        is_fraction_part = true;
+        cin.putback(c);
+        cin >> bruch;
+        bruch_builder.push_back(char_value_as_nummeric);
+
+        if(bruch_builder.size() >= 2){
+          Bruch zaehler = bruch_builder[0],
+                nenner  = bruch_builder[1];
+          bruch = zaehler / nenner;
+          bruch_holder.push_back(bruch);
+          is_fraction_part = false;
+        }
+      }
+    }
+
+    else
+    {
+      switch (c){
+        case '+':
+          bruch  = bruch_holder[0] + lhs_input;
+          cout << bruch_holder[0] << " + " << lhs_input << " = " << bruch << endl;
+          break;
+
+        case '-':
+          bruch  = bruch_holder[0] - lhs_input;
+          cout << bruch_holder[0] << " - " << lhs_input << " = " << bruch << endl;
+          break;
+
+        case '*':
+          bruch  = bruch_holder[0] * lhs_input;
+          cout << bruch_holder[0] << " * " << lhs_input << " = " << bruch << endl;
+          break;
+
+        case '/':
+          if(bruch_holder.size() == 1 && !is_fraction_part){
+            bruch  = bruch_holder[0] / lhs_input;
+            cout << bruch_holder[0] << " / " << lhs_input << " = " << bruch << endl;
+          }
+          break;
+      }
+    }
+
+    if(c == 'k'){
+      bruch.kuerzeBruch(bruch);
+      cout << "gekürtzt: " << bruch << endl;
+    }
+
+    // Das nächste Zeichen ist Enter-Taste
+    if(c == '\r' || c == '\n'){ break; }
+  }
+}
+void FractionOperator::showUsageExample(){
+  cout << "Für die Eingabe nutzen Sie bitte folgendes:\n\n"
+       << "1/2\t  3\t +\n"
+       << "^--^\t  ^\t ^\n"
+       << "Bruch\t Zahl\t Operator\n" << endl;
 }
