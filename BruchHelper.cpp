@@ -107,7 +107,7 @@ void FractionOperator::callOperatorFractions(){
   Bruch bruch;
   char c;
   bool is_fraction_part = true;
-  cout << " Eingabe: ";
+  cout << "Eingabe: ";
   while (cin){
     c = static_cast<char>(cin.get());
 
