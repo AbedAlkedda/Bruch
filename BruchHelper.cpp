@@ -1,6 +1,6 @@
 #include <iostream>
-#include "BruchHelper.hpp"
 #include "Bruch.hpp"
+#include "BruchHelper.hpp"
 
 using std::cout;
 using std::cin;
@@ -24,19 +24,20 @@ void FractionMethods::addFractions(std::unordered_map<std::string, long int> &ar
   long int lhs_zaehler = args["lhs_zaehler"],
            rhs_zaehler = args["rhs_zaehler"],
            rhs_nenner  = args["rhs_nenner"];
+
   if (has_same_denominator){
     args["rhs_zaehler"] = lhs_zaehler + rhs_zaehler;
     args["rhs_nenner"]  = rhs_nenner;
   } else {
     unionFractions(args);
   }
-
 }
 
-void FractionMethods::divideFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator){
+void FractionMethods::subtractFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator){
   long int lhs_zaehler = args["lhs_zaehler"],
            rhs_zaehler = args["rhs_zaehler"],
            rhs_nenner  = args["rhs_nenner"];
+
   if (has_same_denominator){
     args["rhs_zaehler"] = lhs_zaehler - rhs_zaehler;
     args["rhs_nenner"]  = rhs_nenner;
@@ -52,16 +53,15 @@ void FractionMethods::unionFractions(std::unordered_map<std::string, long int> &
            rhs_nenner  = args["rhs_nenner"];
 
   long int kgv = _kgV(lhs_nenner, rhs_nenner);
+
   if (kgv == lhs_nenner){
     long int multi = kgv / rhs_nenner;
     args["rhs_zaehler"] = multi * rhs_zaehler;
     args["rhs_nenner"]  = kgv;
-
   } else if (kgv == rhs_nenner){
     long int multi = kgv / lhs_nenner;
     args["lhs_zaehler"] = multi * lhs_zaehler;
     args["lhs_nenner"]  = kgv;
-
   } else {
     args["lhs_zaehler"] = lhs_zaehler * rhs_nenner;
     args["lhs_nenner"]  = lhs_nenner  * rhs_nenner;
@@ -111,13 +111,14 @@ void FractionOperator::callOperatorFractions(){
   while (cin){
     c = static_cast<char>(cin.get());
 
-    // Das nächste Zeichen im Eingabearray ist eine Nummer
+    // Das nächste Zeichen im EingabeArray ist eine Nummer
+
     if ((c >= '0') && (c <= '9')) {
-      long int char_value_as_nummeric = c - '0';
+      long int char_value_as_numeric = c - '0';
       is_fraction_part = true;
       cin.putback(c);
       cin >> bruch;
-      bruch_builder.push_back(char_value_as_nummeric);
+      bruch_builder.push_back(char_value_as_numeric);
 
       if (bruch_builder.size() >= 2){
         Bruch zaehler = bruch_builder[0],
@@ -133,8 +134,7 @@ void FractionOperator::callOperatorFractions(){
       Das nächste Zeichen im Eingabearray ist ein Operator und der Switch
       ist nur für den Operator zwischen zwei Objekten der Klasse Bruch
     */
-    else
-    {
+    if (c != ' '){
       unsigned long brueche_count = brueche.size();
       Bruch lhs_bruch,
             rhs_bruch;
@@ -188,7 +188,7 @@ void FractionOperator::callOperatorFractions(){
 
     if (c == 'k'){
       bruch.kuerzeBruch(bruch);
-      cout << "gekürtzt: " << bruch << endl;
+      cout << "gekürzt: " << bruch << endl;
     }
 
     // Das nächste Zeichen ist Enter-Taste
@@ -207,8 +207,8 @@ void FractionOperator::callOperatorFractionLongInt(){
   while (cin){
     c = static_cast<char>(cin.get());
 
-    if ((c >= '0') && (c <= '9')) {
-      long int char_value_as_nummeric = c - '0';
+    if ((c >= '0') && (c <= '9')){
+      long int char_value_as_numeric = c - '0';
       if (bruch_holder.size() == 1){
         cin.putback(c);
         cin >> rhs_input;
@@ -216,7 +216,7 @@ void FractionOperator::callOperatorFractionLongInt(){
         is_fraction_part = true;
         cin.putback(c);
         cin >> bruch;
-        bruch_builder.push_back(char_value_as_nummeric);
+        bruch_builder.push_back(char_value_as_numeric);
 
         if (bruch_builder.size() >= 2){
           Bruch zaehler = bruch_builder[0],
@@ -228,8 +228,7 @@ void FractionOperator::callOperatorFractionLongInt(){
       }
     }
 
-    else
-    {
+    if (c != ' '){
       switch (c){
         case '+':
           bruch  = bruch_holder[0] + rhs_input;
@@ -257,7 +256,7 @@ void FractionOperator::callOperatorFractionLongInt(){
 
     if (c == 'k'){
       bruch.kuerzeBruch(bruch);
-      cout << "gekürtzt: " << bruch << endl;
+      cout << "gekürzt: " << bruch << endl;
     }
 
     // Das nächste Zeichen ist Enter-Taste

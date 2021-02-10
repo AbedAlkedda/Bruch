@@ -4,7 +4,7 @@
 
 using namespace FractionMethods;
 
-// Konstruktor und Destruktor
+// Konstruktor
 Bruch::Bruch(long int nenner_lhs, long int zaehler_rhs){
   _nenner  = nenner_lhs;
   _zaehler = zaehler_rhs;
@@ -19,6 +19,9 @@ Bruch::Bruch(){
   _nenner  = 1;
   _zaehler = 1;
  }
+
+// Destruktor
+Bruch::~Bruch(){ }
 
 // Getter und Setter
 long int Bruch::getNumerator() const {
@@ -87,13 +90,13 @@ Bruch operator- (const Bruch &lhs, const Bruch &rhs){
 
     result._setBruch(0, 0);
   } else if (has_same_denominator){
-    FractionMethods::divideFractions(args, has_same_denominator);
+    FractionMethods::subtractFractions(args, has_same_denominator);
     rhs_zaehler = args["rhs_zaehler"];
     rhs_nenner  = args["rhs_nenner"];
 
     result._setBruch(rhs_nenner, rhs_zaehler);
   } else {
-    FractionMethods::divideFractions(args, has_same_denominator);
+    FractionMethods::subtractFractions(args, has_same_denominator);
     long int lhs_zaehler = args["lhs_zaehler"],
              lhs_nenner  = args["lhs_nenner"];
 

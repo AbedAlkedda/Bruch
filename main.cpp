@@ -1,7 +1,7 @@
+#include <vector>
 #include <iostream>
 #include "Bruch.hpp"
 #include "BruchHelper.hpp"
-#include <vector>
 
 using std::cout;
 using std::cin;
@@ -9,13 +9,19 @@ using std::endl;
 
 using namespace FractionOperator;
 
+/*
+  In der int main() Methode lebt das Programm und im Laufe der Zeit wird das größer, deshalb
+  habe ich die Methode dünn gelassen und die ganze Logik wo anderes gepackt. Da wenn man die Methode main liest,
+  versteht man die Hauptaufge des Programms und zwar Bruch rechnen
+*/
+
 int main() {
-  cout << "\U00002663\U00002663\tDatentype Bruch\t\U00002663\U00002663\n";
+  cout << "\tDatentype Bruch\n";
   std::string user_input;
 
   do{
     cout << "1. Operator zwischen Bruch und long int\n"
-         << "2. Operator zwischen Brüche" << endl;
+         << "2. Operator zwischen Brüchen" << endl;
     cin >> user_input;
     cin.ignore(1);
     if (user_input == "1"){
@@ -28,6 +34,7 @@ int main() {
            << "Nochmal versuchen? [ja/nein] ";
       cin >> user_input;
 
+      // Zu dem Fall, dass der Nutzer JA/Ja oder jA eingibt
       for (unsigned long i = 0; i < user_input.length(); i++){
         user_input[i] = static_cast<char>(tolower(user_input[i]));
       }

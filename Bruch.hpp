@@ -1,6 +1,6 @@
 #include <array>
-#include <unordered_map>
 #include <iostream>
+#include <unordered_map>
 
 #ifndef BRUCH_H
 #define BRUCH_H
@@ -8,12 +8,15 @@
 class Bruch {
 
   public:
-
+    // Konstruktor
     Bruch(long int nenner, long int zaehler);
     Bruch(long int z);
     Bruch();
 
-    // Getter und Setter
+    // Destruktor
+    ~Bruch();
+
+    // Getter
     long int getDenominator() const;
     long int getNumerator() const;
 
