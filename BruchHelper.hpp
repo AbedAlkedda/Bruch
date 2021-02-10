@@ -30,7 +30,7 @@ namespace FractionMethods {
   // Eine Hilf-Metode für Bruch operator +
   void addFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
 
-  // Eine Hilf-Metode für Bruch operator /
+  // Eine Hilf-Metode für Bruch operator -
   void subtractFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
 
   // Eine Hilf-Metode für Bruch operator + - * und /, die überprüft, ob ie Nenner gleich sind oder Null sind
