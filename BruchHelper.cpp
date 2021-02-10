@@ -17,7 +17,7 @@ bool FractionMethods::isDenominatorsZero(const long int &lhs_nenner, const long 
 }
 
 void FractionMethods::showError(){
-  std::cout << "Dividieren durch 0 ist nicht erlaubt!" << std::endl;
+  cout << "Dividieren durch 0 ist nicht erlaubt!" << endl;
 }
 
 void FractionMethods::addFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator){
@@ -200,10 +200,10 @@ void FractionOperator::callOperatorFractionLongInt(){
   std::vector <long int> bruch_builder;
   std::vector <Bruch> bruch_holder;
   Bruch bruch;
-  long int lhs_input = 0;
+  long int rhs_input = 0;
   char c;
   bool is_fraction_part = true;
-  std::cout << "Eingabe: ";
+  cout << "Eingabe: ";
   while (cin){
     c = static_cast<char>(cin.get());
 
@@ -211,7 +211,7 @@ void FractionOperator::callOperatorFractionLongInt(){
       long int char_value_as_nummeric = c - '0';
       if(bruch_holder.size() == 1){
         cin.putback(c);
-        cin >> lhs_input;
+        cin >> rhs_input;
       } else {
         is_fraction_part = true;
         cin.putback(c);
@@ -232,24 +232,24 @@ void FractionOperator::callOperatorFractionLongInt(){
     {
       switch (c){
         case '+':
-          bruch  = bruch_holder[0] + lhs_input;
-          cout << bruch_holder[0] << " + " << lhs_input << " = " << bruch << endl;
+          bruch  = bruch_holder[0] + rhs_input;
+          cout << bruch_holder[0] << " + " << rhs_input << " = " << bruch << endl;
           break;
 
         case '-':
-          bruch  = bruch_holder[0] - lhs_input;
-          cout << bruch_holder[0] << " - " << lhs_input << " = " << bruch << endl;
+          bruch  = bruch_holder[0] - rhs_input;
+          cout << bruch_holder[0] << " - " << rhs_input << " = " << bruch << endl;
           break;
 
         case '*':
-          bruch  = bruch_holder[0] * lhs_input;
-          cout << bruch_holder[0] << " * " << lhs_input << " = " << bruch << endl;
+          bruch  = bruch_holder[0] * rhs_input;
+          cout << bruch_holder[0] << " * " << rhs_input << " = " << bruch << endl;
           break;
 
         case '/':
           if(bruch_holder.size() == 1 && !is_fraction_part){
-            bruch  = bruch_holder[0] / lhs_input;
-            cout << bruch_holder[0] << " / " << lhs_input << " = " << bruch << endl;
+            bruch  = bruch_holder[0] / rhs_input;
+            cout << bruch_holder[0] << " / " << rhs_input << " = " << bruch << endl;
           }
           break;
       }
@@ -264,6 +264,7 @@ void FractionOperator::callOperatorFractionLongInt(){
     if(c == '\r' || c == '\n'){ break; }
   }
 }
+
 void FractionOperator::showUsageExample(){
   cout << "Für die Eingabe nutzen Sie bitte folgendes:\n\n"
        << "1/2\t  3\t +\n"

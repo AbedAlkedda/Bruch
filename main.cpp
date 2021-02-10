@@ -25,7 +25,7 @@ int main() {
       callOperatorFractions();
     } else {
       cout << "Falsche Eingabe! "
-          << "Nochmal versuchen? [ja/nein] ";
+           << "Nochmal versuchen? [ja/nein] ";
       cin >> user_input;
 
       for (unsigned long i = 0; i < user_input.length(); i++){
