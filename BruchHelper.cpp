@@ -119,7 +119,7 @@ void FractionOperator::callOperatorFractions(){
       cin >> bruch;
       bruch_builder.push_back(char_value_as_nummeric);
 
-      if(bruch_builder.size() >= 2){
+      if (bruch_builder.size() >= 2){
         Bruch zaehler = bruch_builder[0],
               nenner  = bruch_builder[1];
         bruch = zaehler / nenner;
@@ -171,7 +171,7 @@ void FractionOperator::callOperatorFractions(){
           break;
 
         case '/':
-          if(brueche_count >= 2 && !is_fraction_part){
+          if (brueche_count >= 2 && !is_fraction_part){
             lhs_bruch = brueche[brueche_count - 2];
             rhs_bruch = brueche[brueche_count - 1];
             bruch     = lhs_bruch / rhs_bruch;
@@ -186,13 +186,13 @@ void FractionOperator::callOperatorFractions(){
       }
     }
 
-    if(c == 'k'){
+    if (c == 'k'){
       bruch.kuerzeBruch(bruch);
       cout << "gekürtzt: " << bruch << endl;
     }
 
     // Das nächste Zeichen ist Enter-Taste
-    if(c == '\r' || c == '\n'){ break; }
+    if (c == '\r' || c == '\n'){ break; }
   }
 }
 
@@ -209,7 +209,7 @@ void FractionOperator::callOperatorFractionLongInt(){
 
     if ((c >= '0') && (c <= '9')) {
       long int char_value_as_nummeric = c - '0';
-      if(bruch_holder.size() == 1){
+      if (bruch_holder.size() == 1){
         cin.putback(c);
         cin >> rhs_input;
       } else {
@@ -218,7 +218,7 @@ void FractionOperator::callOperatorFractionLongInt(){
         cin >> bruch;
         bruch_builder.push_back(char_value_as_nummeric);
 
-        if(bruch_builder.size() >= 2){
+        if (bruch_builder.size() >= 2){
           Bruch zaehler = bruch_builder[0],
                 nenner  = bruch_builder[1];
           bruch = zaehler / nenner;
@@ -247,7 +247,7 @@ void FractionOperator::callOperatorFractionLongInt(){
           break;
 
         case '/':
-          if(bruch_holder.size() == 1 && !is_fraction_part){
+          if (bruch_holder.size() == 1 && !is_fraction_part){
             bruch  = bruch_holder[0] / rhs_input;
             cout << bruch_holder[0] << " / " << rhs_input << " = " << bruch << endl;
           }
@@ -255,13 +255,13 @@ void FractionOperator::callOperatorFractionLongInt(){
       }
     }
 
-    if(c == 'k'){
+    if (c == 'k'){
       bruch.kuerzeBruch(bruch);
       cout << "gekürtzt: " << bruch << endl;
     }
 
     // Das nächste Zeichen ist Enter-Taste
-    if(c == '\r' || c == '\n'){ break; }
+    if (c == '\r' || c == '\n'){ break; }
   }
 }
 

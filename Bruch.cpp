@@ -114,7 +114,7 @@ Bruch operator* (const Bruch &lhs, const Bruch &rhs){
 
   Bruch result;
 
-  if(lhs_nenner == 0 || rhs_nenner == 0){
+  if (lhs_nenner == 0 || rhs_nenner == 0){
     showError();
     result._setBruch(0, 0);
   } else {
@@ -137,7 +137,7 @@ Bruch operator/ (const Bruch &lhs, const Bruch &rhs){
 
   Bruch result;
 
-  if(lhs_nenner == 0 || rhs_nenner == 0){
+  if (lhs_nenner == 0 || rhs_nenner == 0){
     showError();
     result._setBruch(0, 0);
   } else {

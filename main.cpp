@@ -18,7 +18,7 @@ int main() {
          << "2. Operator zwischen Brüche" << endl;
     cin >> user_input;
     cin.ignore(1);
-    if(user_input == "1"){
+    if (user_input == "1"){
       showUsageExample();
       callOperatorFractionLongInt();
     } else if (user_input == "2"){
