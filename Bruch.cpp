@@ -10,18 +10,15 @@ Bruch::Bruch(long int nenner_lhs, long int zaehler_rhs){
   _zaehler = zaehler_rhs;
  }
 
-Bruch::Bruch(long int z){
+Bruch::Bruch(long int zaehler){
   _nenner  = 1;
-  _zaehler = z;
+  _zaehler = zaehler;
  }
 
 Bruch::Bruch(){
   _nenner  = 1;
   _zaehler = 1;
  }
-
-// Destruktor
-Bruch::~Bruch(){ }
 
 // Getter und Setter
 long int Bruch::getNumerator() const {

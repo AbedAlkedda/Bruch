@@ -5,13 +5,13 @@
 #include "Bruch.hpp"
 
 namespace FractionMethods {
-  // Zeigt eine Fehlermeldung für den Fall, dass das Ergibnes x/0 ist oder falls der Nutzer x/0 eingibt
+  // Zeigt eine Fehlermeldung für den Fall, dass das Ergebnis x/0 ist oder falls der Nutzer x/0 eingibt
   void showError();
 
-  // größter gemeinsamer Teiler berecnhnen
+  // größten gemeinsamen Teiler berechnen
   long int _ggT(long int nenner, long int zaehler);
 
-  // kleinstes gemeinsames Vielfaches berecnhnen
+  // kleinstes gemeinsames Vielfaches berechnen
   long int _kgV(long int nenner, long int zaehler);
 
   // vereinigt Nenner
@@ -23,32 +23,32 @@ namespace FractionMethods {
   // überprüft, ob die Nenner Null sind
   bool isDenominatorsZero(const long int &lhs_nenner, const long int &rhs_nenner);
 
-  // fasst die Argumente (Nenner und Zähler) von der Brüchern zusammen.
-  // Damit kein Kode sich wiederholt (DRY-Prinzip 'Dont Repeat Yourself')
+  // fasst die Argumente (Nenner und Zähler) von der Brüchen zusammen.
+  // Damit kein Code sich wiederholt (DRY-Prinzip 'Dont Repeat Yourself')
   std::unordered_map<std::string, long int> fractionsArgs(const Bruch &lhs, const Bruch &rhs);
 
-  // Eine Hilf-Metode für Bruch operator +
+  // Eine Hilfs-Methode für Bruch operator +
   void addFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
 
-  // Eine Hilf-Metode für Bruch operator -
+  // Eine Hilfs-Methode für Bruch operator -
   void subtractFractions(std::unordered_map<std::string, long int> &args, bool has_same_denominator);
 
-  // Eine Hilf-Metode für Bruch operator + - * und /, die überprüft, ob ie Nenner gleich sind oder Null sind
+  // Eine Hilfs-Methode für Bruch operator + - * und /, die überprüft, ob die Nenner gleich sind oder Null sind
   std::unordered_map<std::string, bool> getFractionValidation(const long int &lhs_nenner, const long int &rhs_nenner);
 }
 
 namespace FractionOperator {
-  // Zeigt ein Beispiel für den Operator zwichen einem Bruch und einem Objekt vom
+  // Zeigt ein Beispiel für den Operator zwischen einem Bruch und einem Objekt vom
   // Typ long int
   void showUsageExample();
 
-  // zeigt das Eingabefled für die Operation zwischen zwei Brüchern
+  // zeigt das Eingabefeld für die Operation zwischen zwei Brüchen
   void callOperatorFractions();
 
-  // zeigt das Eingabefled für die Operation zwischen einem Bruch und einem Objekt vom
+  // zeigt das Eingabefeld für die Operation zwischen einem Bruch und einem Objekt vom
   // Typ long int
   void callOperatorFractionLongInt();
 
-  // löscht die letzten Brüche aus dem vektor und fügt das neue Ergnis hinzu
+  // löscht die letzten Brüche aus dem Vektor und fügt das neue Ergebnis hinzu
   void fractionsCollectorRebuild(std::vector<Bruch> &brueche, const Bruch &bruch);
 }

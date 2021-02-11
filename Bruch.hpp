@@ -10,11 +10,8 @@ class Bruch {
   public:
     // Konstruktor
     Bruch(long int nenner, long int zaehler);
-    Bruch(long int z);
+    Bruch(long int zaehler);
     Bruch();
-
-    // Destruktor
-    ~Bruch();
 
     // Getter
     long int getDenominator() const;
@@ -30,7 +27,6 @@ class Bruch {
     friend Bruch operator/ (const Bruch &lhs, const Bruch &rhs);
     friend std::ostream& operator<< (std::ostream& output, const Bruch& bruch);
     friend std::istream& operator>> (std::istream& input, Bruch& bruch);
-
 
   private:
 
