@@ -38,10 +38,8 @@ int main() {
       for (unsigned long i = 0; i < user_input.length(); i++){
         user_input[i] = static_cast<char>(tolower(user_input[i]));
       }
-
     }
-    cout << "Möchten Sie nochmal rechnen? [ja/nein] ";
-    cin >> user_input;
+    tryAgain(user_input);
   } while(user_input == "ja");
 
   return 0;

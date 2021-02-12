@@ -104,15 +104,15 @@ void FractionOperator::callOperatorFractions(){
   std::vector <Bruch> brueche;
   std::vector <long int> bruch_builder;
 
-  Bruch bruch;
   char c;
+  Bruch bruch;
   bool is_fraction_part = true;
+
   cout << "Eingabe: ";
   while (cin){
     c = static_cast<char>(cin.get());
 
     // Das nächste Zeichen im EingabeArray ist eine Nummer
-
     if ((c >= '0') && (c <= '9')) {
       long int char_value_as_numeric = c - '0';
       is_fraction_part = true;
@@ -134,7 +134,7 @@ void FractionOperator::callOperatorFractions(){
       Das nächste Zeichen im Eingabearray ist ein Operator und der Switch
       ist nur für den Operator zwischen zwei Objekten der Klasse Bruch
     */
-    if (c != ' '){
+    if (isOperator(c)){
       unsigned long brueche_count = brueche.size();
       Bruch lhs_bruch,
             rhs_bruch;
@@ -192,17 +192,19 @@ void FractionOperator::callOperatorFractions(){
     }
 
     // Das nächste Zeichen ist Enter-Taste
-    if (c == '\r' || c == '\n'){ break; }
+    if ((c == '\r' || c == '\n') || !hasValidInput(c)){ break; }
   }
 }
 
 void FractionOperator::callOperatorFractionLongInt(){
+  std::vector <Bruch>    bruch_holder;
   std::vector <long int> bruch_builder;
-  std::vector <Bruch> bruch_holder;
+
+  char c;
   Bruch bruch;
   long int rhs_input = 0;
-  char c;
   bool is_fraction_part = true;
+
   cout << "Eingabe: ";
   while (cin){
     c = static_cast<char>(cin.get());
@@ -228,7 +230,7 @@ void FractionOperator::callOperatorFractionLongInt(){
       }
     }
 
-    if (c != ' '){
+    if (isOperator(c)){
       switch (c){
         case '+':
           bruch  = bruch_holder[0] + rhs_input;
@@ -258,9 +260,8 @@ void FractionOperator::callOperatorFractionLongInt(){
       bruch.kuerzeBruch(bruch);
       cout << "gekürzt: " << bruch << endl;
     }
-
     // Das nächste Zeichen ist Enter-Taste
-    if (c == '\r' || c == '\n'){ break; }
+    if ((c == '\r' || c == '\n') || !hasValidInput(c)){ break; }
   }
 }
 
@@ -269,4 +270,31 @@ void FractionOperator::showUsageExample(){
        << "1/2\t  3\t +\n"
        << "^--^\t  ^\t ^\n"
        << "Bruch\t Zahl\t Operator\n" << endl;
+}
+
+bool FractionOperator::isOperator(const char &c){
+  bool is_operator = false;
+  if(c == '+' || c == '-' || c == '*' || c == '/') { is_operator = true; }
+  return is_operator;
+}
+
+bool FractionOperator::hasValidInput(const char &c){
+  bool has_vaild_input = false;
+
+  if (isOperator(c) || isdigit(c) || isspace(c)){
+    has_vaild_input = true;
+  }
+
+  if (c == 'k') { has_vaild_input = true; }
+
+  if (!has_vaild_input){
+    printf ("Das Zeichen '%c' ist nicht erlaubt\n", c);
+  }
+  return has_vaild_input;
+}
+
+void FractionOperator::tryAgain(std::string &user_input){
+  cin.ignore(1);
+  cout << "Nochmal versuchen? [ja/nein] ";
+  cin >> user_input;
 }

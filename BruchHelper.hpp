@@ -51,4 +51,13 @@ namespace FractionOperator {
 
   // löscht die letzten Brüche aus dem Vektor und fügt das neue Ergebnis hinzu
   void fractionsCollectorRebuild(std::vector<Bruch> &brueche, const Bruch &bruch);
+
+  // überprüft, ob das nächste Zeichen ein Operator ist
+  bool isOperator(const char &c);
+
+  // überprüft die Eingabe
+  bool hasValidInput(const char &c);
+
+  // wiederholt das Programm
+  void tryAgain(std::string &user_input);
 }
