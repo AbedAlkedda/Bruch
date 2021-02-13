@@ -16,6 +16,8 @@ using namespace FractionOperator;
 */
 
 int main() {
+  printExerciseExample();
+
   cout << "\tDatentype Bruch\n";
   std::string user_input;
 

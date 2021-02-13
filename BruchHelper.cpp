@@ -317,3 +317,11 @@ void FractionOperator::tryAgain(std::string &user_input){
   cout << "Nochmal versuchen? [ja/nein] ";
   cin >> user_input;
 }
+
+void FractionOperator::printExerciseExample(){
+  Bruch bruch_zaehler_nenner(1, 10);
+  Bruch bruch_zaehler(23);
+
+  cout << "Bruch( 1, 10 ) " << bruch_zaehler_nenner << endl;
+  cout << "Bruch( 23 ) " << bruch_zaehler << endl;
+}
