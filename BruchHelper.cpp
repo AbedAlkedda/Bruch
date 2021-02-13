@@ -112,87 +112,92 @@ void FractionOperator::callOperatorFractions(){
   while (cin){
     c = static_cast<char>(cin.get());
 
-    // Das nächste Zeichen im EingabeArray ist eine Nummer
-    if ((c >= '0') && (c <= '9')) {
-      long int char_value_as_numeric = c - '0';
-      is_fraction_part = true;
+    if (c != ' '){
       cin.putback(c);
-      cin >> bruch;
-      bruch_builder.push_back(char_value_as_numeric);
+      c = static_cast<char>(cin.get());
 
-      if (bruch_builder.size() >= 2){
-        Bruch zaehler = bruch_builder[0],
-              nenner  = bruch_builder[1];
-        bruch = zaehler / nenner;
-        brueche.push_back(bruch);
-        bruch_builder.clear();
-        is_fraction_part = false;
+      // Das nächste Zeichen im EingabeArray ist eine Nummer
+      if ((c >= '0') && (c <= '9')) {
+        long int char_value_as_numeric = c - '0';
+        is_fraction_part = true;
+        cin.putback(c);
+        cin >> bruch;
+        bruch_builder.push_back(char_value_as_numeric);
+
+        if (bruch_builder.size() >= 2){
+          Bruch zaehler = bruch_builder[0],
+                nenner  = bruch_builder[1];
+          bruch = zaehler / nenner;
+          brueche.push_back(bruch);
+          bruch_builder.clear();
+          is_fraction_part = false;
+        }
       }
-    }
 
-    /*
-      Das nächste Zeichen im Eingabearray ist ein Operator und der Switch
-      ist nur für den Operator zwischen zwei Objekten der Klasse Bruch
-    */
-    if (isOperator(c)){
-      unsigned long brueche_count = brueche.size();
-      Bruch lhs_bruch,
-            rhs_bruch;
+      /*
+        Das nächste Zeichen im Eingabearray ist ein Operator und der Switch
+        ist nur für den Operator zwischen zwei Objekten der Klasse Bruch
+      */
+      if (isOperator(c)){
+        unsigned long brueche_count = brueche.size();
+        Bruch lhs_bruch,
+              rhs_bruch;
 
-      switch (c){
-        case '+':
-          lhs_bruch = brueche[brueche_count - 2];
-          rhs_bruch = brueche[brueche_count - 1];
-          bruch     = lhs_bruch + rhs_bruch;
-
-          cout << lhs_bruch << " + " << rhs_bruch << " = " << bruch << endl;
-
-          fractionsCollectorRebuild(brueche, bruch);
-          break;
-
-        case '-':
-          lhs_bruch = brueche[brueche_count - 2];
-          rhs_bruch = brueche[brueche_count - 1];
-          bruch     = lhs_bruch - rhs_bruch;
-
-          fractionsCollectorRebuild(brueche, bruch);
-
-          cout << lhs_bruch << " - " << rhs_bruch << " = " << bruch << endl;
-          break;
-
-        case '*':
-          lhs_bruch = brueche[brueche_count - 2];
-          rhs_bruch = brueche[brueche_count - 1];
-          bruch     = lhs_bruch * rhs_bruch;
-
-          cout << lhs_bruch << " * " << rhs_bruch << " = " << bruch << endl;
-
-          fractionsCollectorRebuild(brueche, bruch);
-          break;
-
-        case '/':
-          if (brueche_count >= 2 && !is_fraction_part){
+        switch (c){
+          case '+':
             lhs_bruch = brueche[brueche_count - 2];
             rhs_bruch = brueche[brueche_count - 1];
-            bruch     = lhs_bruch / rhs_bruch;
+            bruch     = lhs_bruch + rhs_bruch;
 
-            is_fraction_part = false;
-
-            cout << lhs_bruch << " / " << rhs_bruch << " = " << bruch << endl;
+            cout << lhs_bruch << " + " << rhs_bruch << " = " << bruch << endl;
 
             fractionsCollectorRebuild(brueche, bruch);
-          }
-          break;
+            break;
+
+          case '-':
+            lhs_bruch = brueche[brueche_count - 2];
+            rhs_bruch = brueche[brueche_count - 1];
+            bruch     = lhs_bruch - rhs_bruch;
+
+            fractionsCollectorRebuild(brueche, bruch);
+
+            cout << lhs_bruch << " - " << rhs_bruch << " = " << bruch << endl;
+            break;
+
+          case '*':
+            lhs_bruch = brueche[brueche_count - 2];
+            rhs_bruch = brueche[brueche_count - 1];
+            bruch     = lhs_bruch * rhs_bruch;
+
+            cout << lhs_bruch << " * " << rhs_bruch << " = " << bruch << endl;
+
+            fractionsCollectorRebuild(brueche, bruch);
+            break;
+
+          case '/':
+            if (brueche_count >= 2 && !is_fraction_part){
+              lhs_bruch = brueche[brueche_count - 2];
+              rhs_bruch = brueche[brueche_count - 1];
+              bruch     = lhs_bruch / rhs_bruch;
+
+              is_fraction_part = false;
+
+              cout << lhs_bruch << " / " << rhs_bruch << " = " << bruch << endl;
+
+              fractionsCollectorRebuild(brueche, bruch);
+            }
+            break;
+        }
       }
-    }
 
-    if (c == 'k'){
-      bruch.kuerzeBruch(bruch);
-      cout << "gekürzt: " << bruch << endl;
-    }
+      if (c == 'k'){
+        bruch.kuerzeBruch(bruch);
+        cout << "gekürzt: " << bruch << endl;
+      }
 
-    // Das nächste Zeichen ist Enter-Taste
-    if ((c == '\r' || c == '\n') || !hasValidInput(c)){ break; }
+      // Das nächste Zeichen ist Enter-Taste
+      if ((c == '\r' || c == '\n') || !hasValidInput(c)){ break; }
+    }
   }
 }
 
@@ -208,60 +213,65 @@ void FractionOperator::callOperatorFractionLongInt(){
   cout << "Eingabe: ";
   while (cin){
     c = static_cast<char>(cin.get());
+    if (c != ' '){
+      cin.putback(c);
+      c = static_cast<char>(cin.get());
 
-    if ((c >= '0') && (c <= '9')){
-      long int char_value_as_numeric = c - '0';
-      if (bruch_holder.size() == 1){
-        cin.putback(c);
-        cin >> rhs_input;
-      } else {
-        is_fraction_part = true;
-        cin.putback(c);
-        cin >> bruch;
-        bruch_builder.push_back(char_value_as_numeric);
+      if ((c >= '0') && (c <= '9')){
+        long int char_value_as_numeric = c - '0';
+        if (bruch_holder.size() == 1){
+          cin.putback(c);
+          cin >> rhs_input;
+        } else {
+          is_fraction_part = true;
+          cin.putback(c);
+          cin >> bruch;
+          bruch_builder.push_back(char_value_as_numeric);
 
-        if (bruch_builder.size() >= 2){
-          Bruch zaehler = bruch_builder[0],
-                nenner  = bruch_builder[1];
-          bruch = zaehler / nenner;
-          bruch_holder.push_back(bruch);
-          is_fraction_part = false;
+          if (bruch_builder.size() >= 2){
+            Bruch zaehler = bruch_builder[0],
+                  nenner  = bruch_builder[1];
+            bruch = zaehler / nenner;
+            bruch_holder.push_back(bruch);
+            is_fraction_part = false;
+          }
         }
       }
-    }
 
-    if (isOperator(c)){
-      switch (c){
-        case '+':
-          bruch  = bruch_holder[0] + rhs_input;
-          cout << bruch_holder[0] << " + " << rhs_input << " = " << bruch << endl;
-          break;
+      if (isOperator(c)){
+        switch (c){
+          case '+':
+            bruch  = bruch_holder[0] + rhs_input;
+            cout << bruch_holder[0] << " + " << rhs_input << " = " << bruch << endl;
+            break;
 
-        case '-':
-          bruch  = bruch_holder[0] - rhs_input;
-          cout << bruch_holder[0] << " - " << rhs_input << " = " << bruch << endl;
-          break;
+          case '-':
+            bruch  = bruch_holder[0] - rhs_input;
+            cout << bruch_holder[0] << " - " << rhs_input << " = " << bruch << endl;
+            break;
 
-        case '*':
-          bruch  = bruch_holder[0] * rhs_input;
-          cout << bruch_holder[0] << " * " << rhs_input << " = " << bruch << endl;
-          break;
+          case '*':
+            bruch  = bruch_holder[0] * rhs_input;
+            cout << bruch_holder[0] << " * " << rhs_input << " = " << bruch << endl;
+            break;
 
-        case '/':
-          if (bruch_holder.size() == 1 && !is_fraction_part){
-            bruch  = bruch_holder[0] / rhs_input;
-            cout << bruch_holder[0] << " / " << rhs_input << " = " << bruch << endl;
-          }
-          break;
+          case '/':
+            if (bruch_holder.size() == 1 && !is_fraction_part){
+              bruch  = bruch_holder[0] / rhs_input;
+              cout << bruch_holder[0] << " / " << rhs_input << " = " << bruch << endl;
+            }
+            break;
+        }
       }
-    }
 
-    if (c == 'k'){
-      bruch.kuerzeBruch(bruch);
-      cout << "gekürzt: " << bruch << endl;
+      if (c == 'k'){
+        bruch.kuerzeBruch(bruch);
+        cout << "gekürzt: " << bruch << endl;
+      }
+
+      // Das nächste Zeichen ist Enter-Taste
+      if ((c == '\r' || c == '\n') || !hasValidInput(c)){ break; }
     }
-    // Das nächste Zeichen ist Enter-Taste
-    if ((c == '\r' || c == '\n') || !hasValidInput(c)){ break; }
   }
 }
 
@@ -294,7 +304,6 @@ bool FractionOperator::hasValidInput(const char &c){
 }
 
 void FractionOperator::tryAgain(std::string &user_input){
-  cin.ignore(1);
   cout << "Nochmal versuchen? [ja/nein] ";
   cin >> user_input;
 }
