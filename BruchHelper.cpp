@@ -283,7 +283,10 @@ void FractionOperator::showUsageExample(){
 }
 
 void FractionOperator::showUsageExampleFractions(){
-  cout << "Nur einstelliger Bruch wird berechnet\n"
+  cout << "Bitte nur solche Eingabe nutzen: "
+       << "Bruch Bruch Operator\n"
+       << "Beispiel: 1/2 3/4 +\n\n"
+       << "Nur einstelliger Bruch wird berechnet\n"
        << "Beispiel:     19/2 38/5 +\n"
        << "wird gelesen: 1/2 3/5 +"
        << endl;
