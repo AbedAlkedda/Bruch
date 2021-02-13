@@ -28,6 +28,7 @@ int main() {
       showUsageExample();
       callOperatorFractionLongInt();
     } else if (user_input == "2"){
+      showUsageExampleFractions();
       callOperatorFractions();
     } else {
       cout << "Falsche Eingabe! "

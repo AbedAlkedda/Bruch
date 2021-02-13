@@ -42,6 +42,9 @@ namespace FractionOperator {
   // Typ long int
   void showUsageExample();
 
+  // Zeigt ein Beispiel für den Operator zwischen zwei Brüche
+  void showUsageExampleFractions();
+
   // zeigt das Eingabefeld für die Operation zwischen zwei Brüchen
   void callOperatorFractions();
 

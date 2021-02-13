@@ -282,6 +282,13 @@ void FractionOperator::showUsageExample(){
        << "Bruch\t Zahl\t Operator\n" << endl;
 }
 
+void FractionOperator::showUsageExampleFractions(){
+  cout << "Nur einstelliger Bruch wird berechnet\n"
+       << "Beispiel:     19/2 38/5 +\n"
+       << "wird gelesen: 1/2 3/5 +"
+       << endl;
+}
+
 bool FractionOperator::isOperator(const char &c){
   bool is_operator = false;
   if(c == '+' || c == '-' || c == '*' || c == '/') { is_operator = true; }
