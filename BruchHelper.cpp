@@ -276,19 +276,19 @@ void FractionOperator::callOperatorFractionLongInt(){
 }
 
 void FractionOperator::showUsageExample(){
-  cout << "Für die Eingabe nutzen Sie bitte folgendes:\n\n"
+  cout << "\nFür die Eingabe nutzen Sie bitte folgendes:\n\n"
        << "1/2\t  3\t +\n"
        << "^--^\t  ^\t ^\n"
        << "Bruch\t Zahl\t Operator\n" << endl;
 }
 
 void FractionOperator::showUsageExampleFractions(){
-  cout << "Bitte nur solche Eingabe nutzen: "
+  cout << "\nBitte nur solche Eingabe nutzen: "
        << "Bruch Bruch Operator\n"
        << "Beispiel: 1/2 3/4 +\n\n"
        << "Nur einstelliger Bruch wird berechnet\n"
        << "Beispiel:     19/2 38/5 +\n"
-       << "wird gelesen: 1/2 3/5 +"
+       << "wird gelesen: 1/2 3/5 +\n"
        << endl;
 }
 
