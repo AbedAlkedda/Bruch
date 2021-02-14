@@ -314,6 +314,9 @@ bool FractionOperator::hasValidInput(const char &c){
 }
 
 void FractionOperator::tryAgain(std::string &user_input){
+  cin.clear();
+  std::string ignore_line;
+  getline(cin, ignore_line);
   cout << "Nochmal versuchen? [ja/nein] ";
   cin >> user_input;
 }
