@@ -29,9 +29,11 @@ int main() {
     if (user_input == "1"){
       showUsageExample();
       callOperatorFractionLongInt();
+      user_input = userInput();
     } else if (user_input == "2"){
       showUsageExampleFractions();
       callOperatorFractions();
+      user_input = userInput();
     } else {
       cout << "Falsche Eingabe! "
            << "Nochmal versuchen? [ja/nein] ";
@@ -42,7 +44,6 @@ int main() {
         user_input[i] = static_cast<char>(tolower(user_input[i]));
       }
     }
-    tryAgain(user_input);
   } while(user_input == "ja");
 
   return 0;

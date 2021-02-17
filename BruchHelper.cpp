@@ -137,8 +137,9 @@ void FractionOperator::callOperatorFractions(){
       /*
         Das nächste Zeichen im Eingabearray ist ein Operator und der Switch
         ist nur für den Operator zwischen zwei Objekten der Klasse Bruch
+        Die if-Anweisung sorgt dafür, die ungeweunschte Zeichen zu ignorieren
       */
-      if (isOperator(c)){
+      if (isOperator(c) && brueche.size() >= 2){
         unsigned long brueche_count = brueche.size();
         Bruch lhs_bruch,
               rhs_bruch;
@@ -238,7 +239,7 @@ void FractionOperator::callOperatorFractionLongInt(){
         }
       }
 
-      if (isOperator(c)){
+      if (isOperator(c) && bruch_holder.size()){
         switch (c){
           case '+':
             bruch  = bruch_holder[0] + rhs_input;
@@ -309,16 +310,9 @@ bool FractionOperator::hasValidInput(const char &c){
 
   if (!has_vaild_input){
     printf ("Das Zeichen '%c' ist nicht erlaubt\n", c);
+    clearStreambuf();
   }
   return has_vaild_input;
-}
-
-void FractionOperator::tryAgain(std::string &user_input){
-  cin.clear();
-  std::string ignore_line;
-  getline(cin, ignore_line);
-  cout << "Nochmal versuchen? [ja/nein] ";
-  cin >> user_input;
 }
 
 void FractionOperator::printExerciseExample(){
@@ -327,4 +321,18 @@ void FractionOperator::printExerciseExample(){
 
   cout << "Bruch( 1, 10 ) " << bruch_zaehler_nenner << endl;
   cout << "Bruch( 23 ) " << bruch_zaehler << endl;
+}
+
+void FractionOperator::clearStreambuf(){
+  cin.clear();
+  std::string ignore_line;
+  getline(cin, ignore_line);
+}
+
+std::string FractionOperator::userInput(){
+  std::string user_input;
+  cout << "Nochmal? [ja/nein] ";
+  cin >> user_input;
+
+  return user_input;
 }
